@@ -9,6 +9,9 @@ namespace Lab3.Controllers
 {
     public class HomeController : Controller
     {
+
+        private static PersonRepo repo = new PersonRepo();
+
         public IActionResult Index()
         {
             var date = DateTime.Now;
@@ -66,21 +69,29 @@ namespace Lab3.Controllers
         public IActionResult ShowPerson()
         {
             ViewData["Title"] = "Show Person";
-            Person p = new Person
-            {
-                LastName = "Smith",
-                FirstName = "John",
-                DateOfBirth = new DateTime(1968, 2, 16)
-            };
 
-            int age = DateTime.Today.Year - p.DateOfBirth.Year;
+            return View(repo.PersonList);
+        }
 
-            if (DateTime.Now.Month < DateTime.Now.Month || (DateTime.Now.Month == DateTime.Now.Month && DateTime.Now.Day < DateTime.Now.Day))
-            age--;
 
-            p.Age = age;
 
+        public IActionResult AddPerson()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddPerson(Person p)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.Add(p);
+            
+                return RedirectToAction("ShowPerson");
+
+            }  else  {
+                return View();
+            }
         }
     }
 }
