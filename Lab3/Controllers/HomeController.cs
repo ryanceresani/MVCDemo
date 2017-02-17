@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Lab3.Models;
 
 namespace Lab3.Controllers
 {
@@ -63,8 +64,24 @@ namespace Lab3.Controllers
         }
 
         public IActionResult ShowPerson()
-        { 
+        {
+            ViewData["Title"] = "Show Person";
+            Person p = new Person
+            {
+                LastName = "Smith",
+                FirstName = "John",
+                DateOfBirth = new DateTime(1968, 2, 16)
+            };
+
+            int age = DateTime.Today.Year - p.DateOfBirth.Year;
+
+            if (DateTime.Now.Month < DateTime.Now.Month || (DateTime.Now.Month == DateTime.Now.Month && DateTime.Now.Day < DateTime.Now.Day))
+            age--;
+
+            p.Age = age;
+
             return View();
         }
     }
 }
+
