@@ -10,6 +10,36 @@ namespace Lab3.Controllers
     {
         public IActionResult Index()
         {
+            var date = DateTime.Now;
+            var time = date.ToString("h:mm:ss tt");
+            var day = date.ToString("dddd MMMM dd, yyyy");
+
+            ViewData["Date"] = day;
+            ViewData["Time"] = time;
+
+            TimeSpan noon = new TimeSpan(12, 0, 0);
+            TimeSpan six = new TimeSpan(18, 0, 0);
+
+            //var testTime = new DateTime(date.Year, date.Month, date.Day, 5, 0, 0);
+            //Replace date.TimeOfDay with custom test time to test logic.
+            if (date.TimeOfDay < noon)
+            {
+                ViewData["Greeting"] = "Good Morning!";
+            }
+            else if (date.TimeOfDay < six)
+            {
+                ViewData["Greeting"] = "Good Afternoon!";
+            }
+            else
+            {
+                ViewData["Greeting"] = "Good Evening!";
+            }
+
+            var nextYear = new DateTime(date.Year + 1, 1, 1);
+            int daysInYear = DateTime.IsLeapYear(date.Year) ? 366 : 365;
+            int daysLeftInYear = daysInYear - date.DayOfYear;
+            ViewData["DaysLeft"] = daysLeftInYear;
+            ViewData["NextYear"] = nextYear.ToString("yyyy");
             return View();
         }
 
@@ -29,6 +59,11 @@ namespace Lab3.Controllers
 
         public IActionResult Error()
         {
+            return View();
+        }
+
+        public IActionResult ShowPerson()
+        { 
             return View();
         }
     }
