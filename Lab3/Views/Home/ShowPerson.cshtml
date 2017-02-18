@@ -1,8 +1,15 @@
 ﻿@model List<Lab3.Models.Person>
+
+@{
+    ViewData["Title"] = "Show Last 10 Added Persons";
+}
+
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
 </head>
 
+<h1>@ViewData["Title"]</h1>
+<br />
 <table class="table">
     <tr>
         <td>

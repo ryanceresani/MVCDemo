@@ -86,7 +86,6 @@ namespace Lab3.Controllers
             if (ModelState.IsValid)
             {
                 repo.Add(p);
-            
                 return RedirectToAction("ShowPerson");
 
             }  else  {

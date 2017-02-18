@@ -1,6 +1,9 @@
-﻿@{
+﻿@model Lab3.Models.Person
+
+@{
     ViewData["Title"] = "Add Person";
 }
+
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
 </head>
@@ -8,24 +11,21 @@
 <h1>@ViewData["Title"]</h1>
 <br />
 <br />
-<form asp-action="ShowPerson" method="post">
+<form asp-action="AddPerson" method="post">
     <div class="form-group">
-        <label for="firstName">First Name:</label>
+        <label for="FirstName">First Name:</label>
         <input type="text" class="form-control" name="FirstName">
-        <span class="text-danger field-validation-valid" data-valmsg-for="Category" data-valmsg-replace="true"></span>
+        <span class="text-danger field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
     </div>
     <div class="form-group">
         <label for="LastName">Last Name:</label>
         <input type="text" class="form-control" name="LastName">
-        <span class="text-danger field-validation-valid" data-valmsg-for="Category" data-valmsg-replace="true"></span>
+        <span class="text-danger field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
     </div>
     <div class="form-group">
         <label for="DateOfBirth">Date Of Birth:</label>
         <input type="date" class="form-control" name="DateOfBirth">
-        <span class="text-danger field-validation-valid" data-valmsg-for="Category" data-valmsg-replace="true"></span>
+        <span class="text-danger field-validation-valid" data-valmsg-for="DateOfBirth" data-valmsg-replace="true"></span>
     </div>
     <button type="submit" class="btn btn-default" value="Submit">Submit</button>
 </form>
-
-
-@*<span class="text-danger field-validation-valid" data-valmsg-for="Price" data-valmsg-replace="true"></span>*@
