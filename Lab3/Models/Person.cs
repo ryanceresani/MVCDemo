@@ -8,15 +8,15 @@ namespace Lab3.Models
 {
     public class Person
     {
-        [Required]
+        [Required(ErrorMessage = "The First Name field is required.")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Enter a name between 2 and 20 characters long.")]
         public String FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Last Name field is required.")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Enter a name between 2 and 20 characters long.")]
         public String LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Date of Birth field is required.")]
         public DateTime DateOfBirth { get; set; }
 
         public int Age

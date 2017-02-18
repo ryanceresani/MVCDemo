@@ -27,6 +27,10 @@ namespace Lab3.Models
 
         public void Add(Person person)
         {
+            if(PersonList.Count >= 10)
+            {
+                PersonList.RemoveAt(0);
+            }
             PersonList.Add(person);
         }
     }

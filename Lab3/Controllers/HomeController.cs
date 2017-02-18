@@ -89,7 +89,7 @@ namespace Lab3.Controllers
                 return RedirectToAction("ShowPerson");
 
             }  else  {
-                return View();
+                return View(p);
             }
         }
     }
