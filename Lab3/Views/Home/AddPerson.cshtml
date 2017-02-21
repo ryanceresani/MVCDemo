@@ -14,19 +14,18 @@
 <form asp-action="AddPerson" method="post">
     <div class="form-group">
         <label for="FirstName">First Name:</label>
-        <input type="text" class="form-control" name="FirstName">
-        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        <input class="form-control" asp-for="FirstName">
+        <span class="text-danger" asp-validation-for="FirstName"></span>
     </div>
     <div class="form-group">
         <label for="LastName">Last Name:</label>
-        <input type="text" class="form-control" name="LastName">
-        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        <input asp-for="LastName" class="form-control">
+        <span class="text-danger" asp-validation-for="LastName"></span>
     </div>
     <div class="form-group">
         <label for="DateOfBirth">Date Of Birth:</label>
-        <input type="date" class="form-control" name="DateOfBirth">
-        @Html.ValidationMessageFor(model => model.DateOfBirth, "",  new { @class = "text-danger", data_val_date = "Date of Birth is required."})
-        
+        <input type="date" class="form-control" asp-for="DateOfBirth">
+        <span class="text-danger" asp-validation-for="DateOfBirth"></span>     
     </div>
     <button type="submit" class="btn btn-default" value="Submit">Submit</button>
 </form>
