@@ -10,8 +10,12 @@ namespace Lab3.Controllers
     public class HomeController : Controller
     {
 
-        private static PersonRepo repo = new PersonRepo();
+        private readonly ApplicationDbContext _context;
 
+        public  HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
             var date = DateTime.Now;
@@ -70,7 +74,7 @@ namespace Lab3.Controllers
         {
             ViewData["Title"] = "Show Person";
 
-            return View(repo.PersonList);
+            return View(_context.Persons.ToList());
         }
 
 
@@ -85,7 +89,8 @@ namespace Lab3.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.Add(p);
+                _context.Persons.Add(p);
+                _context.SaveChanges();
                 return RedirectToAction("ShowPerson");
 
             }  else  {

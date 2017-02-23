@@ -8,6 +8,9 @@ namespace Lab3.Models
 {
     public class Person
     {
+
+        public int ID { get; set; }
+
         [Required(ErrorMessage = "The First Name field is required.")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Enter a name between 2 and 20 characters long.")]
         public String FirstName { get; set; }
