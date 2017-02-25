@@ -9,13 +9,15 @@ namespace Lab3.Controllers
 {
     public class HomeController : Controller
     {
-
+        private PersonRepo repo;
         private readonly ApplicationDbContext _context;
 
         public  HomeController(ApplicationDbContext context)
         {
             _context = context;
+            repo = new PersonRepo(context);
         }
+
         public IActionResult Index()
         {
             var date = DateTime.Now;
@@ -48,36 +50,52 @@ namespace Lab3.Controllers
             int daysLeftInYear = daysInYear - date.DayOfYear;
             ViewData["DaysLeft"] = daysLeftInYear;
             ViewData["NextYear"] = nextYear.ToString("yyyy");
-            return View();
+
+            return View(_context.Persons.ToList());
+        }
+        // GET: /<controller>/
+        public IActionResult ShowPerson(int? id)
+        {
+            Person per;
+            if (id == null)
+            {
+                per = new Person
+                { 
+                    FirstName = "Alan",
+                    LastName = "Turing",
+                    DateOfBirth = new DateTime(1912, 07, 23)
+                };
+                ViewData["RemoveEnabled"] = false;
+            }
+            else
+            {
+                ViewData["RemoveEnabled"] = true;
+                per = _context.Persons.SingleOrDefault(p => p.ID == id);
+            }
+
+            return View(per);
         }
 
-        public IActionResult About()
+
+        public IActionResult Details(int? id)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var person = _context.Persons
+                    .SingleOrDefault(p => p.ID == id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            return View("ShowPerson", person);
         }
 
         public IActionResult Error()
         {
             return View();
         }
-
-        public IActionResult ShowPerson()
-        {
-            ViewData["Title"] = "Show Person";
-
-            return View(_context.Persons.ToList());
-        }
-
-
 
         public IActionResult AddPerson()
         {
@@ -89,13 +107,19 @@ namespace Lab3.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Persons.Add(p);
-                _context.SaveChanges();
-                return RedirectToAction("ShowPerson");
+                repo.Add(p);
+                return RedirectToAction("Index");
 
             }  else  {
                 return View(p);
             }
+        }
+
+        public IActionResult RemovePerson(int? id)
+        {
+           var person = _context.Persons.SingleOrDefault(p => p.ID == id);
+           repo.Remove(person);
+           return RedirectToAction("Index");
         }
     }
 }

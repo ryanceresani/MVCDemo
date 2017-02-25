@@ -1,3 +1,32 @@
-﻿<h1>@ViewData["Greeting"]</h1>
-<h1>The time is @ViewData["Time"] on @ViewData["Date"]</h1>
-<h1>@ViewData["DaysLeft"] more days until @ViewData["NextYear"]</h1>
+﻿<h4>@ViewData["Greeting"]</h4>
+<h4>The time is @ViewData["Time"] on @ViewData["Date"]</h4>
+<h4>@ViewData["DaysLeft"] more days until @ViewData["NextYear"]</h4>
+<br />
+
+@model List<Lab3.Models.Person>
+
+<h1>Person List</h1>
+
+<table class="table">
+    <tr>
+        @*<td>
+                Product ID
+            </td>*@
+        <td>Name</td>
+        <td>Date of Birth</td>
+        <td>Age</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>@item.ProductID</td>*@
+            <td><a asp-action="Details" asp-route-id="@item.ID">@item.FirstName  @item.LastName</a></td>
+            <td>@item.DateOfBirth.ToString("MM/dd/yyyy")</td>
+            <td>@item.Age</td>
+        </tr>
+    }
+</table>
+
+
+<a asp-action="ShowPerson" asp-controller="Home" class="btn btn-info">See a sample person</a>
+<a asp-action="AddPerson" asp-controller="Home" class="btn btn-info">Add a person</a>

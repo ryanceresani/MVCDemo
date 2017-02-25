@@ -1,31 +1,37 @@
-﻿@model List<Lab3.Models.Person>
+﻿@model Lab3.Models.Person
 
 @{
-    ViewData["Title"] = "Last 10 Added Persons";
 }
-
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
 </head>
 
-<h1>@ViewData["Title"]</h1>
+@if (Model != null)
+{
+    <h2>Person</h2>
+
+    <span>Name: </span>@Model.FirstName<span> </span>@Model.LastName
+    <br />
+    <span>
+        Birth Date: 
+    </span>@Model.DateOfBirth.ToString("MM/dd/yyyy")
+    <br />
+    <span>
+        Age:
+    </span>@Model.Age
+    <br />
+}
+else
+{
+    < span >
+        No product found
+    </ span >
+}
 <br />
-<table class="table">
-    <tr>
-        <td>
-            <b>First Name</b>
-        </td>
-        <td><b>Last Name</b></td>
-        <td><b>Date of Birth</b></td>
-        <td><b>Age</b></td>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.FirstName</td>
-            <td>@item.LastName</td>
-            <td>@item.DateOfBirth.ToString("MM/dd/yyyy")</td>
-            <td>@item.Age</td>
-        </tr>
-    }
-</table>
+<a asp-action="AddPerson" asp-controller="Home" class="btn btn-info">Add a new person</a>
+@if (ViewData["RemoveEnabled"].Equals(true))
+{
+    <a asp-action="RemovePerson" asp-controller="Home" asp-route-id="@Model.ID" class="btn btn-danger">Remove this Person</a>
+}
+
+
