@@ -93,6 +93,35 @@ namespace Lab3.Controllers
             return View("ShowPerson", person);
         }
 
+        public IActionResult EditPerson(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var person = _context.Persons
+                    .SingleOrDefault(p => p.ID == id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            return View(person);
+        }
+
+        [HttpPost]
+        public IActionResult EditPerson(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.Edit(person);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(person);
+            }
+        }
+
         public IActionResult Error()
         {
             return View();

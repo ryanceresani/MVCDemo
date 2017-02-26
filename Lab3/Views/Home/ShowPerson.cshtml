@@ -28,9 +28,10 @@ else
     </ span >
 }
 <br />
-<a asp-action="AddPerson" asp-controller="Home" class="btn btn-info">Add a new person</a>
+<a asp-action="AddPerson" asp-controller="Home" class="btn btn-info">Add a new Person</a>
 @if (ViewData["RemoveEnabled"].Equals(true))
 {
+    <a asp-action="EditPerson" asp-controller="Home" asp-route-id="@Model.ID" class="btn btn-primary">Edit this Person</a>
     <a asp-action="RemovePerson" asp-controller="Home" asp-route-id="@Model.ID" class="btn btn-danger">Remove this Person</a>
 }
 

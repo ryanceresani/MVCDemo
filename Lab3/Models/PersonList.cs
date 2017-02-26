@@ -65,7 +65,7 @@ namespace Lab3.Models
         }
         public void Edit(Person person)
         {
-
+            _context.Update(person);
             _context.SaveChanges();
         }
     }
