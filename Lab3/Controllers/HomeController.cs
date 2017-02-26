@@ -89,6 +89,7 @@ namespace Lab3.Controllers
             {
                 return NotFound();
             }
+            ViewData["RemoveEnabled"] = true;
             return View("ShowPerson", person);
         }
 

@@ -8,7 +8,7 @@ using Lab3.Models;
 namespace Lab3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170223163215_init")]
+    [Migration("20170225214815_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
